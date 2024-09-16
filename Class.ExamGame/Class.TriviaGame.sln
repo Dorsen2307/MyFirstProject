@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class.TriviaGame", "Class.TriviaGame\Class.TriviaGame.csproj", "{CA4B65C4-B804-4A96-A0E9-A11B6A0921BB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Class.TriviaGame.Domain", "Class.TriviaGame.Domain", "{BB43E40C-FCDE-4ABA-BAA7-D496222B09B0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Class.TriviaGame.Infrastructure", "Class.TriviaGame.Infrastructure", "{3540C600-F01A-46CF-8BD5-E9884E4CF952}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class.TriviaGame.Infrastructure.DB", "Class.TriviaGame.Infrastructure.DB\Class.TriviaGame.Infrastructure.DB.csproj", "{A7C314CF-EC0B-42E4-9024-E21A521EE68A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class.TriviaGame.Domain.Dekanat", "Class.TriviaGame.Domain.Dekanat\Class.TriviaGame.Domain.Dekanat.csproj", "{8E3841E3-A7DA-47E9-9E82-BFCF44903CD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Class.TriviaGame.Domain.Service", "Class.TriviaGame.Domain.Service\Class.TriviaGame.Domain.Service.csproj", "{58EF2531-FBCF-4AE8-A45F-4B0B0D43D5EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA4B65C4-B804-4A96-A0E9-A11B6A0921BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA4B65C4-B804-4A96-A0E9-A11B6A0921BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA4B65C4-B804-4A96-A0E9-A11B6A0921BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA4B65C4-B804-4A96-A0E9-A11B6A0921BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7C314CF-EC0B-42E4-9024-E21A521EE68A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7C314CF-EC0B-42E4-9024-E21A521EE68A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7C314CF-EC0B-42E4-9024-E21A521EE68A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7C314CF-EC0B-42E4-9024-E21A521EE68A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E3841E3-A7DA-47E9-9E82-BFCF44903CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E3841E3-A7DA-47E9-9E82-BFCF44903CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E3841E3-A7DA-47E9-9E82-BFCF44903CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E3841E3-A7DA-47E9-9E82-BFCF44903CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58EF2531-FBCF-4AE8-A45F-4B0B0D43D5EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58EF2531-FBCF-4AE8-A45F-4B0B0D43D5EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58EF2531-FBCF-4AE8-A45F-4B0B0D43D5EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58EF2531-FBCF-4AE8-A45F-4B0B0D43D5EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A7C314CF-EC0B-42E4-9024-E21A521EE68A} = {3540C600-F01A-46CF-8BD5-E9884E4CF952}
+		{8E3841E3-A7DA-47E9-9E82-BFCF44903CD3} = {BB43E40C-FCDE-4ABA-BAA7-D496222B09B0}
+		{58EF2531-FBCF-4AE8-A45F-4B0B0D43D5EB} = {BB43E40C-FCDE-4ABA-BAA7-D496222B09B0}
+	EndGlobalSection
+EndGlobal
