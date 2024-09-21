@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Class.TriviaGame.Domain.Service\Class.TriviaGame.Domain.Service.csproj" />
       <ProjectReference Include="..\Class.TriviaGame.Infrastructure.DB\Class.TriviaGame.Infrastructure.DB.csproj" />
     </ItemGroup>
 

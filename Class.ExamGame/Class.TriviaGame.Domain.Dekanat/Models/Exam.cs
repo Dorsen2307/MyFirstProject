@@ -1,49 +1,40 @@
-﻿using Class.TriviaGame.Domain.Dekanat.Validator;
-using Class.TriviaGame.Domain.Service.Services;
+﻿using Class.TriviaGame.Domain.Dekanat.Services;
+using Class.TriviaGame.Domain.Dekanat.Validator;
 using Class.TriviaGame.Infrastructure.DB.Models;
 
 namespace Class.TriviaGame.Domain.Dekanat.Models;
 
 public static class Exam
 {
-    private static readonly List<Question> Questions = PreMadeQuestions.Questions;
-    
-    private static readonly List<Statement> Statement = PreMadeStatements.Statements;
-    
-    public static int Scores { get; set; }
-    
-    public static List<string> Answers { get; set; } = [];
 
-    public static void Start(int id, string name)
+    public static void Start(Statement statement, List<Question> questions)
     {
-        Scores = 0;
+        var score = 0;
+
+        var answers = new List<string>();
+
+        // ReadSettingJson.WriteAsync();
         
-        Answers.Clear();
-        
-        foreach (var question in Questions)
+        foreach (var question in questions)
         {
             GenerateSymbolToAnswer.Generate(question);
             
             QuestionsOutput.Output(question, GenerateSymbolToAnswer.SymbolToAnswers);
             
-            InputValidator.GetAndValidateUserInput(question, Answers);
+            var checkedStudentAnswer = InputGetterAndValidator.GetAndCheckUserAnswer(question, score);
+            
+            answers.Add(checkedStudentAnswer.Answer);
+
+            score = checkedStudentAnswer.score;
         }
         
-        StatementServices.AddNewStatementRecord(
-            id, 
-            name, 
-            Answers, 
-            Scores, 
-            0, 
-            "\nWe record the results in a statement.");
+        StatementServices.UpdateStatementAfterQuestions(
+            statement, 
+            answers, 
+            score,
+            "The data has been entered.");
         
-        StatementServices.RecordingDataStatement(
-            Statement, 
-            id, 
-            Answers, 
-            Scores);
-        
-        StatementServices.OutStatement(id);
+        StatementServices.OutStatement(statement);
     }
     
     

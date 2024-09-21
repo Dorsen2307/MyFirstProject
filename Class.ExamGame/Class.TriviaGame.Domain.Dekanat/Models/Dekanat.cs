@@ -1,43 +1,74 @@
-﻿using Class.TriviaGame.Domain.Dekanat.Validator;
-using Class.TriviaGame.Domain.Service.Services;
+﻿using Class.TriviaGame.Domain.Dekanat.Extensions;
+using Class.TriviaGame.Domain.Dekanat.Services;
+using Class.TriviaGame.Domain.Dekanat.Validator;
+using Class.TriviaGame.Infrastructure.DB.DataBases;
+using Class.TriviaGame.Infrastructure.DB.Models;
 
 namespace Class.TriviaGame.Domain.Dekanat.Models;
     
 public class Dekanat : IDekanat
 {
-    public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
-    private bool IsNextStudentExists { get; set; } = true;
+
+    private readonly IStatementDb _statementDb;
+    private readonly IQuestionDb _questionsDb;
+
+    public Dekanat(IStatementDb statementDb, IQuestionDb questionsDb)
+    {
+        _statementDb = statementDb;
+        _questionsDb = questionsDb;
+    }
 
     public void Start()
     {
-        while (IsNextStudentExists)
+        var isNextStudentExists = true;
+        
+        while (isNextStudentExists)
         {
-            
-            Name = InputValidator.NameInputValidator();
-
-            Id = InputValidator.IdInputValidator(Name);
-
-            var studentFinderStatus = StudentServices.StudentFinder(Id, Name);
-            
-            if (studentFinderStatus == string.Empty)
+            try
             {
-                StatementServices.AddNewStatementRecord(
-                    Id, 
-                    Name, 
-                    Exam.Answers, 
-                    Exam.Scores, 
-                    0,
-                    "\nAdding a student record.");
-            }
+                var statement = GetOrCreateStatement();
 
-            if (studentFinderStatus == "attempts" || studentFinderStatus == string.Empty)
+                var questions = _questionsDb.GetQuestions();
+
+                Exam.Start(statement, questions);
+
+                isNextStudentExists = StudentInvitation();
+            }
+            catch (Exception e)
             {
-                Exam.Start(Id, Name);
+                Console.WriteLine(e.Message);
             }
-
-            IsNextStudentExists = StudentInvitation();
+            
         }
+    }
+
+    private Statement GetOrCreateStatement()
+    {
+        var studentName = InputGetterAndValidator.GetAndValidateStudentName();
+
+        var studentId = InputGetterAndValidator.GetAndValidateStudentId(studentName);
+
+        var statement = _statementDb.GetExistingOrAddNewAndReturn(studentId, studentName);
+            
+        var studentAndStatementValidationResult = StudentValidationServices.ValidateStudentByIdAndName(
+            statement,
+            studentId, 
+            studentName);
+
+        if (!studentAndStatementValidationResult.IsStatementMatchStudent)
+        {
+            throw new StatementException("We don't know each other.");
+        }
+        if (!studentAndStatementValidationResult.IsNotCheating)
+        {
+            throw new StatementException("Fuck you cheater!");
+        }
+        if (!studentAndStatementValidationResult.IsAttemptsLeft)
+        {
+            throw new StatementException("You don't have any attempts!");
+        }
+
+        return statement;
     }
 
     private bool StudentInvitation()
@@ -53,6 +84,5 @@ public class Dekanat : IDekanat
 
         return false;
     }
-
-    
 }
+
