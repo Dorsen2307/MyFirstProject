@@ -44,7 +44,7 @@ public class InputGetterAndValidator
         
         if (question.CorrectAnswers.Equals(studentAnswer, StringComparison.OrdinalIgnoreCase))
         {
-            score.AddWeight(question);
+            score = score.AddWeight(question);
 
             studentAnswer += " +";
             
